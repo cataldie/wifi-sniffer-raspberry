@@ -2,7 +2,9 @@ import sys
 import os
 import subprocess
 import time
+import signal
 import shutil
+import thread
 
 class NetworkSniffer():
     def __init__(self):
@@ -71,11 +73,15 @@ class NetworkSniffer():
         x = 5#some amount of seconds
         delay = 1.0
         timeout = int(x / delay)
-        
-        popen = subprocess.Popen(['sudo airodump-ng '+ device+'mon --write data/test.csv'])
+        cmd = ["sudo", "airodump-ng" ,device+"mon", "--write" , "data/test.csv"]
+        popen = subprocess.Popen(cmd,
+                stderr=subprocess.STDOUT,  # Merge stdout and stderr
+                stdout=subprocess.PIPE)
         #while the process is still executing and we haven't timed-out yet
         while popen.poll() is None and timeout > 0:
             #do other things too if necessary e.g. print, check resources, etc.
             time.sleep(delay)
             print(timeout)
             timeout -= delay
+        os.killpg(os.getpgid(popen.pid), signal.SIGTERM)  
+    

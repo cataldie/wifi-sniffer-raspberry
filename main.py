@@ -40,8 +40,10 @@ def mainFnV1():
         localDBTableSniffer.insertRow(data,sqltxt)
 def mainFn(device):
     if sniffer.checkIfMonitorIsSupported(device):
+        sniffer.enableMonitorMode(device)
         if sniffer.checkIfMonitorModeIsOn(device):
             sniffer.getSniffer(device)
+
 
 if __name__ == "__main__":
     #try:
