@@ -20,9 +20,9 @@ sqltxt = """
         """
 localDBTableSniffer = DbClassTable("snifferrasperry","data/","snifferrasperry","sniffer",sqltxt,dbConfig["host"],dbConfig["user"],dbConfig["psw"])
 
-def mainFn():
+def mainFnV1():
     #check the network
-    sniffer.getSniffer()
+    sniffer.getSnifferV1()
     print(sniffer.sniffer)
     #save to local db
     for s in sniffer.sniffer:
@@ -38,19 +38,29 @@ def mainFn():
             (%s ,%s  ,%s)
             """
         localDBTableSniffer.insertRow(data,sqltxt)
+def mainFn(device):
+    if sniffer.checkIfMonitorIsSupported(device):
+        if sniffer.checkIfMonitorModeIsOn(device):
+            sniffer.getSniffer(device)
 
 if __name__ == "__main__":
-    try:
-        # run mainFn every "interval" second and end at "end"
-        print("Running the sniffer every "+str(sys.argv[1])+"s until "+str(sys.argv[2])+"s")
-        inter=setInterval(float(sys.argv[1]),mainFn,float(sys.argv[2]))
-    except:
-        try:
-            print("Running the sniffer every "+str(sys.argv[1])+"s endless ")
-            # run mainFn every "interval" second and with no end
-            inter=setInterval(float(sys.argv[1]),mainFn)
-        except:
-            interval = 5
-            end = 25
-            print("Running the sniffer every "+str(interval)+"s until "+str(end)+"s")
-            inter=setInterval(interval,mainFn,end)
+    #try:
+    #    # run mainFn every "interval" second and end at "end"
+    #    print("Running the sniffer every "+str(sys.argv[1])+"s until "+str(sys.argv[2])+"s")
+    #    inter=setInterval(float(sys.argv[1]),mainFn,float(sys.argv[2]))
+    #except:
+    #    try:
+    #        print("Running the sniffer every "+str(sys.argv[1])+"s endless ")
+    #        # run mainFn every "interval" second and with no end
+    #        inter=setInterval(float(sys.argv[1]),mainFn)
+    #    except:
+    #        interval = 5
+    #        end = 25
+    #        print("Running the sniffer every "+str(interval)+"s until "+str(end)+"s")
+    #        inter=setInterval(interval,mainFn,end)
+    
+    if len(sys.argv)>1:
+        mainFn(sys.argv[1])
+    else:
+        print("Please insert the device name $ sudo python main.py [device_name]")
+        
