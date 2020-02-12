@@ -39,10 +39,40 @@ def mainFnV1():
             """
         localDBTableSniffer.insertRow(data,sqltxt)
 def mainFn(device):
-    if sniffer.checkIfMonitorIsSupported(device):
-        sniffer.enableMonitorMode(device)
-        if sniffer.checkIfMonitorModeIsOn(device):
-            sniffer.getSniffer(device)
+    if len(sys.argv)>2:
+        sniffer.duration = int(sys.argv[2])
+        print("Searching time has been set to "+str(sniffer.duration))
+    sniffer.device = device
+    if sniffer.checkIfMonitorIsSupported():
+        sniffer.enableMonitorMode()
+        if sniffer.checkIfMonitorModeIsOn():
+            sniffer.getSniffer()
+            saveToLocalDB()
+def saveToLocalDB():
+    #save to local db
+    for s in sniffer.sniffer:
+        if s["status"]==0:
+            row = localDBTableSniffer.selectTablePart("time","WHERE MAC=\""+s["MAC"]+"\"")
+            #print(row)
+            if len(row)==0:
+                current_time = datetime.now()
+                data = [
+                    "",
+                    s["MAC"],
+                    current_time
+                ]
+                sqltxt ="""
+                    (IP ,MAC ,time)
+                    VALUES
+                    (%s ,%s  ,%s)
+                    """
+                localDBTableSniffer.insertRow(data,sqltxt)
+                print("MAC not connected, added to database")
+            else :
+                print("MAC not connected, but added "+str(row[0][0]))
+        else:
+            print("MAC connected")
+        print(s["MAC"])
 
 
 if __name__ == "__main__":
