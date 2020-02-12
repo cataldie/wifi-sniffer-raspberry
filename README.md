@@ -11,11 +11,9 @@ sudo mysql -u root -p
 Python 2.7 required installation 
 $ sudo apt-get install python-mysqldb
 $ pip install mysql-connector-python
+$ sudo apt install aircrack-ng
 
 To run the program
-Will run every 5 seconds until 25 seconds
-$ sudo python main.py 
-Will run every [interval time] seconds until [end time] seconds
-$ sudo python main.py [interval time] [end time]
-Will run every [interval time] seconds endless
-$ sudo python main.py [interval time] 
+$ sudo python main.py [device-name] 
+In this case the scanning time is 50 sec, if you want a custom scanning time use the following command:
+$ sudo python main.py [device-name] [scanning-time]
