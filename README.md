@@ -10,7 +10,10 @@ sudo mysql -u root -p
 
 Python 2.7 required installation 
 $ sudo apt-get install python-mysqldb
+$ sudo apt install python-pip
+$ pip install --upgrade pip
 $ pip install mysql-connector-python
+$ pip install psutil
 $ sudo apt install aircrack-ng
 
 To run the program

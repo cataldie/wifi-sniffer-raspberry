@@ -44,15 +44,19 @@ class NetworkSniffer():
         return self.sniffer
     def checkIfMonitorIsSupported(self):
         print("Checking is the device supports monitor mode")
-        output = subprocess.check_output('iw list | grep "Supported interface modes" -A 7', shell=True)
-        index = 0
-        for s in output:
-            if s=="m":
-                if output[index:index+7]=="monitor":
-                    print("The device supports the monitor mode")
-                    return True
-            index += 1
-        return False
+        try:
+            output = subprocess.check_output('iw list | grep "Supported interface modes" -A 7', shell=True)
+            index = 0
+            for s in output:
+                if s=="m":
+                    if output[index:index+7]=="monitor":
+                        print("The device supports the monitor mode")
+                        return True
+                index += 1
+            return False
+        except:
+            print("The device does not support monitor mode")
+            return False
     def enableMonitorMode(self):
         subprocess.check_output('sudo airmon-ng start '+self.device, shell=True)
     def checkIfMonitorModeIsOn(self):
