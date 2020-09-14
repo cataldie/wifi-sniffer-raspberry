@@ -16,7 +16,7 @@ class NetworkSniffer():
         self.folderName = "data/"
         self.pathToFile = "data/test"
         self.delay = 1.0
-        self.duration = 50
+        self.duration = 100
     def getSnifferV1(self,nameFlag=False):
         # clear the sniffer
         self.sniffer = []
@@ -121,6 +121,7 @@ class NetworkSniffer():
 
                     #print(d)
                     self.sniffer.append(d)
+                    line_count = line_count+1
                 if len(row)>0 and row[0]=="Station MAC":
                     initDone = True
                     #print(row)
