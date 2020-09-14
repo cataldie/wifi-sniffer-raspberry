@@ -13,7 +13,7 @@ $ sudo apt-get install python-mysqldb
 $ sudo apt install python-pip
 $ pip install --upgrade pip
 $ pip install mysql-connector-python
-$ pip install psutil
+$ python -m pip install --upgrade pip
 $ sudo apt install aircrack-ng
 
 To run the program

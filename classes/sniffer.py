@@ -43,7 +43,7 @@ class NetworkSniffer():
                 curr_line += char 
         return self.sniffer
     def checkIfMonitorIsSupported(self):
-        print("Checking is the device supports monitor mode")
+        print("Checking if the device supports monitor mode")
         try:
             output = subprocess.check_output('iw list | grep "Supported interface modes" -A 7', shell=True)
             index = 0
@@ -53,6 +53,7 @@ class NetworkSniffer():
                         print("The device supports the monitor mode")
                         return True
                 index += 1
+            print("The device does not support monitor mode")
             return False
         except:
             print("The device does not support monitor mode")
