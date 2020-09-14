@@ -16,7 +16,7 @@ class NetworkSniffer():
         self.folderName = "data/"
         self.pathToFile = "data/test"
         self.delay = 1.0
-        self.duration = 100
+        self.duration = 50
     def getSnifferV1(self,nameFlag=False):
         # clear the sniffer
         self.sniffer = []
@@ -55,6 +55,10 @@ class NetworkSniffer():
         return False
     def enableMonitorMode(self):
         subprocess.check_output('sudo airmon-ng start '+self.device, shell=True)
+        print("MonitorMode enabled")
+    def disableMonitorMode(self):
+        subprocess.check_output('sudo airmon-ng stop '+self.device+'mon', shell=True)
+        print("MonitorMode disabled")
     def checkIfMonitorModeIsOn(self):
             output = subprocess.check_output('ifconfig  '+self.device+'mon', shell=True)
             index = 0

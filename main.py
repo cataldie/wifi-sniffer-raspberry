@@ -92,7 +92,11 @@ if __name__ == "__main__":
     #        inter=setInterval(interval,mainFn,end)
     
     if len(sys.argv)>1:
-        mainFn(sys.argv[1])
+        if sys.argv[1]=="stop":
+            sniffer.device = sys.argv[2]
+            sniffer.disableMonitorMode()
+        else:
+            mainFn(sys.argv[1])
     else:
         print("Please insert the device name $ sudo python main.py [device_name]")
         

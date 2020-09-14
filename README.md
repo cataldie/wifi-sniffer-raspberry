@@ -13,9 +13,8 @@ $ sudo apt-get install python-mysqldb
 $ pip install mysql-connector-python
 
 To run the program
-Will run every 5 seconds until 25 seconds
-$ sudo python main.py 
-Will run every [interval time] seconds until [end time] seconds
-$ sudo python main.py [interval time] [end time]
-Will run every [interval time] seconds endless
-$ sudo python main.py [interval time] 
+Will run every 1 second until 50 seconds
+$ sudo python main.py [device name]
+$ sudo python main.py [device name] [duration]
+$ sudo python main.py stop [device name]
+
