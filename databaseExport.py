@@ -42,7 +42,7 @@ if len(convertedData)>0:
     ]
     resp_data = urllib.urlencode(post_params)
 
-    url = "http://185.238.148.144:3000/getsnifferUpdates"
+    url = "http://"+sys.argv[1]+"/getsnifferUpdates"
     b_obj = BytesIO() 
     c = pycurl.Curl()
     c.setopt(c.WRITEDATA, b_obj)
