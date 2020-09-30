@@ -15,6 +15,8 @@ $ pip install --upgrade pip
 $ pip install mysql-connector-python
 $ python -m pip install --upgrade pip
 $ sudo apt install aircrack-ng
+$ sudo apt install libcurl4-openssl-dev libssl-dev
+$ pip install pycurl 
 
 To run the program
 Will run every 1 second until 50 seconds
