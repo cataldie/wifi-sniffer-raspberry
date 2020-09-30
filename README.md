@@ -22,3 +22,21 @@ $ sudo python main.py [device name]
 $ sudo python main.py [device name] [duration]
 $ sudo python main.py stop [device name]
 
+# to run the sniffer at the raspberry startup
+
+ifconfig
+#get the current device name and replace wit wlan0
+
+nano runWifiSniffer.sh
+
+sudo chmod 755 ~Documents/wifi-sniffer-raspberry/runWifiSniffer.sh
+cd
+mkdir logs
+sudo crontab -e
+#select 1 or enter
+
+@reboot sh /home/pi/Documents/wifi-sniffer-raspberry/runWifiSniffer.sh >/home/pi/logs/cronlog 2>&1
+
+# log
+cd logs
+cat cronlog
