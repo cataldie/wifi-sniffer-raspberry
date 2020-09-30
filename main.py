@@ -16,7 +16,8 @@ dbConfig = {
 sqltxt = """
         IP   VARCHAR(120),
         MAC  VARCHAR(120),
-        time DATETIME 
+        time DATETIME,
+	uploaded INT
         """
 localDBTableSniffer = DbClassTable("snifferrasperry","data/","snifferrasperry","sniffer",sqltxt,dbConfig["host"],dbConfig["user"],dbConfig["psw"])
 
@@ -33,9 +34,9 @@ def mainFnV1():
             current_time
         ]
         sqltxt ="""
-            (IP ,MAC ,time)
+            (IP ,MAC ,time,uploaded)
             VALUES
-            (%s ,%s  ,%s)
+            (%s ,%s  ,%s,0)
             """
         localDBTableSniffer.insertRow(data,sqltxt)
 def mainFn(device):
