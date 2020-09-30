@@ -51,7 +51,7 @@ def mainFn(device):
 def saveToLocalDB():
     #save to local db
     for s in sniffer.sniffer:
-        if s["status"]==0:
+        if True:#s["status"]==0:
             row = localDBTableSniffer.selectTablePart("time","WHERE MAC=\""+s["MAC"]+"\"")
             #print(row)
             if len(row)==0:
@@ -69,7 +69,7 @@ def saveToLocalDB():
                 localDBTableSniffer.insertRow(data,sqltxt)
                 print("MAC not connected, added to database")
             else :
-                print("MAC not connected, but added "+str(row[0][0]))
+                print("MAC not connected, but already added at"+str(row[0][0]))
         else:
             print("MAC connected")
         print(s["MAC"])
