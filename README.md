@@ -1,3 +1,8 @@
+# interface
+internal ip 192.168.1.250
+ping 192.168.1.250
+ssh pi@192.168.1.250
+controllare che crea un rete ap..
 # wifi-sniffer-raspberry
 #install MySQL
 $ sudo apt update
